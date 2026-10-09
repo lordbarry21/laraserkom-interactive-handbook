@@ -1,0 +1,4 @@
+[
+  {"q": "Apa kepanjangan -mcr?", "a": "Migration, Controller, Resource"},
+  {"q": "Perintah storage link?", "a": "php artisan storage:link"}
+]
