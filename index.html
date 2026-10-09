@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaraSerkom Mastery | Panduan End-to-End Zero-Error Uji Kompetensi</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            canvas: '#09090b',
+                            card: '#121215',
+                            border: '#27272a',
+                            accent: '#10b981',
+                            muted: '#71717a'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Geist', 'Outfit', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Strict anti-slop rules: zero gradient, pure solid color craft */
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #09090b;
+            color: #fafafa;
+            font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+        }
+        .code-block {
+            background-color: #0c0c0e;
+            border: 1px solid #27272a;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #09090b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3f3f46;
+        }
+    </style>
+</head>
+<body class="bg-brand-canvas text-zinc-100 antialiased selection:bg-zinc-800 selection:text-white">
+
+    <!-- Top Sticky Navigation -->
+    <nav class="sticky top-0 z-50 border-b border-brand-border bg-brand-canvas/95 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="w-8 h-8 rounded-lg bg-zinc-800 border border-zinc-700 flex items-center justify-center font-mono font-bold text-xs text-white">LS</span>
+                <div class="flex flex-col">
+                    <span class="text-sm font-semibold tracking-tight text-zinc-100">LaraSerkom Mastery</span>
+                    <span class="text-[11px] text-zinc-500">Panduan Hafalan End-to-End LSP Serkom</span>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-2 sm:space-x-3">
+                <button type="button" onclick="toggleQuizMode()" id="quizToggleBtn" class="px-3 py-1.5 rounded-lg border border-zinc-700 bg-zinc-900 hover:bg-zinc-800 text-xs font-medium text-zinc-300 transition flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <span>Mode Uji Hafalan</span>
+                </button>
+                <a href="#checklist" class="px-3 py-1.5 rounded-lg bg-zinc-100 hover:bg-white text-zinc-950 text-xs font-semibold tracking-tight transition">
+                    Checklist Asesor
+                </a>
+            </div>
+        </div>
+        <!-- Reading Progress Bar -->
+        <div id="progressBar" class="h-[2px] bg-emerald-500 w-0 transition-all duration-150"></div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-12 lg:py-16">
+
+        <!-- Attention: Hero Chapter (Wide Layout, Max 2 Lines Heading) -->
+        <header class="max-w-5xl mx-auto text-center mb-16 sm:mb-24">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-zinc-800 bg-zinc-900 text-xs text-zinc-400 mb-6">
+                <span class="text-emerald-400 font-mono font-bold">LSP-RPL 2026</span>
+                <span>Standar Sertifikasi Pemrograman Web Laravel</span>
+            </div>
+
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-zinc-100 max-w-4xl mx-auto leading-tight">
+                Kuasai Kode Laravel Serkom dari Nol Sampai Otomatis Hafal di Luar Kepala
+            </h1>
+
+            <p class="mt-6 text-sm sm:text-base text-zinc-400 max-w-2xl mx-auto leading-relaxed">
+                Panduan terstruktur end-to-end berbasis Konsep Induk. Dari menyalakan XAMPP, membedah arti flag terminal, hingga trik database transaction atomik dan eliminasi error di depan Asesor.
+            </p>
+
+            <div class="mt-8 flex flex-wrap justify-center gap-3">
+                <a href="#phase-0" class="px-5 py-2.5 rounded-lg bg-zinc-100 hover:bg-white text-zinc-950 font-semibold text-xs sm:text-sm tracking-tight transition">
+                    Mulai Belajar dari Langkah 0
+                </a>
+                <button type="button" onclick="copyEntireCheatSheet()" class="px-5 py-2.5 rounded-lg border border-zinc-800 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 font-medium text-xs sm:text-sm transition">
+                    Salin Ringkasan Command
+                </button>
+            </div>
+        </header>
+
+        <!-- Interest: Gapless Bento Matrix of First Principles -->
+        <section class="mb-20">
+            <div class="mb-6 flex items-center justify-between">
+                <div>
+                    <h2 class="text-xs uppercase tracking-wider text-zinc-500 font-bold">Pondasi Fundamental</h2>
+                    <p class="text-lg font-bold text-zinc-200 mt-0.5">Konsep Induk & Arsitektur Utama</p>
+                </div>
+                <span class="text-xs text-zinc-500">4 Pilar Penentu Kelulusan</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 grid-flow-dense">
+                <!-- Bento Cell 1: Flag -mcr Deconstruction (Col span 2) -->
+                <div class="md:col-span-2 bg-brand-card border border-brand-border rounded-xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="font-mono text-xs px-2.5 py-1 rounded bg-zinc-800 text-emerald-400 font-semibold border border-zinc-700">Artisan Command</span>
+                            <span class="text-xs text-zinc-500">make:model Food -mcr</span>
+                        </div>
+                        <h3 class="text-base font-bold text-zinc-100">Apa Sebenarnya Arti Flag -mcr?</h3>
+                        <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
+                            Banyak siswa hanya menghafal ketikan tanpa paham isinya. Perintah ini menggabungkan 3 aksi vital sekaligus:
+                        </p>
+                        <div class="mt-4 grid grid-cols-3 gap-2 text-center font-mono text-xs">
+                            <div class="bg-zinc-900 border border-zinc-800 p-2.5 rounded-lg">
+                                <span class="text-emerald-400 font-bold block">-m</span>
+                                <span class="text-[11px] text-zinc-400">Migration</span>
+                            </div>
+                            <div class="bg-zinc-900 border border-zinc-800 p-2.5 rounded-lg">
+                                <span class="text-sky-400 font-bold block">-c</span>
+                                <span class="text-[11px] text-zinc-400">Controller</span>
+                            </div>
+                            <div class="bg-zinc-900 border border-zinc-800 p-2.5 rounded-lg">
+                                <span class="text-amber-400 font-bold block">-r</span>
+                                <span class="text-[11px] text-zinc-400">Resource</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-zinc-800 text-[11px] text-zinc-500">
+                        Hasil: Model dibuat di <code class="text-zinc-300">app/Models</code>, Migration di <code class="text-zinc-300">database/migrations</code>, dan Controller lengkap dengan 7 method CRUD standar.
+                    </div>
+                </div>
+
+                <!-- Bento Cell 2: Relasi Database (Col span 1) -->
+                <div class="bg-brand-card border border-brand-border rounded-xl p-6 flex flex-col justify-between">
+                    <div>
+                        <span class="font-mono text-xs px-2 py-0.5 rounded bg-zinc-800 text-sky-400 font-semibold border border-zinc-700">Database Schema</span>
+                        <h3 class="text-sm font-bold text-zinc-100 mt-3">Aturan Emas Foreign Key</h3>
+                        <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
+                            Tabel induk (<code class="text-zinc-300">foods</code> & <code class="text-zinc-300">orders</code>) wajib dimigrasikan duluan sebelum tabel anak (<code class="text-zinc-300">order_details</code>).
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-zinc-800 text-[11px] text-emerald-400 font-mono">
+                        ->constrained('foods')->onDelete('cascade')
+                    </div>
+                </div>
+
+                <!-- Bento Cell 3: Mass Assignment (Col span 1) -->
+                <div class="bg-brand-card border border-brand-border rounded-xl p-6 flex flex-col justify-between">
+                    <div>
+                        <span class="font-mono text-xs px-2 py-0.5 rounded bg-zinc-800 text-amber-400 font-semibold border border-zinc-700">Mass Assignment</span>
+                        <h3 class="text-sm font-bold text-zinc-100 mt-3">$guarded = ['id']</h3>
+                        <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
+                            Jangan pakai <code class="text-zinc-300">$fillable</code> jika sering lupa mendaftarkan kolom kalkulasi baru seperti <code class="text-zinc-300">subtotal</code>.
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-zinc-800 text-[11px] text-zinc-500">
+                        Solusi anti-crash mass assignment exception.
+                    </div>
+                </div>
+
+                <!-- Bento Cell 4: Transaksi Atomik (Col span 2) -->
+                <div class="md:col-span-2 bg-brand-card border border-brand-border rounded-xl p-6 flex flex-col justify-between">
+                    <div>
+                        <span class="font-mono text-xs px-2.5 py-1 rounded bg-zinc-800 text-purple-400 font-semibold border border-zinc-700">Keamanan Data</span>
+                        <h3 class="text-base font-bold text-zinc-100 mt-3">Transaksi DB Atomik (All or Nothing)</h3>
+                        <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
+                            Saat checkout pesanan, data disimpan ke dua tabel: <code class="text-zinc-300">orders</code> dan <code class="text-zinc-300">order_details</code>. Jika detail item kedua gagal disimpan, pesanan induk tidak boleh tersisa sebagai data sampah.
+                        </p>
+                    </div>
+                    <div class="mt-4 font-mono text-xs text-zinc-300 bg-zinc-950 p-2.5 rounded-lg border border-zinc-800">
+                        DB::transaction(function() { /* Auto commit jika sukses, auto rollback jika error */ });
+                    </div>
+                </div>
+
+                <!-- Bento Cell 5: Eager Loading Anti N+1 (Col span 2) -->
+                <div class="md:col-span-2 bg-brand-card border border-brand-border rounded-xl p-6 flex flex-col justify-between">
+                    <div>
+                        <span class="font-mono text-xs px-2.5 py-1 rounded bg-zinc-800 text-rose-400 font-semibold border border-zinc-700">Performa Query</span>
+                        <h3 class="text-base font-bold text-zinc-100 mt-3">Solusi N+1 Query: Order::with()</h3>
+                        <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
+                            Di dashboard admin, hindari query berulang di dalam looping blade dengan teknik Eager Loading bertingkat.
+                        </p>
+                    </div>
+                    <div class="mt-4 font-mono text-xs text-emerald-400 bg-zinc-950 p-2.5 rounded-lg border border-zinc-800">
+                        $orders = Order::with('orderDetails.food')->latest()->get();
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Desire: Interactive Step-by-Step Curriculum (10 Chapters) -->
+        <section class="space-y-12">
+            
+            <!-- Chapter 0: Nyalakan XAMPP & Persiapan Lingkungan -->
+            <article id="phase-0" class="bg-brand-card border border-brand-border rounded-2xl p-6 sm:p-8">
+                <div class="flex items-center justify-between pb-4 border-b border-zinc-800 mb-6">
+                    <div class="flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-md bg-zinc-800 border border-zinc-700 flex items-center justify-center font-mono font-bold text-xs text-zinc-200">00</span>
+                        <h3 class="text-lg font-bold text-zinc-100">Persiapan Lingkungan & Web Server XAMPP</h3>
+                    </div>
+                    <label class="flex items-center gap-2 cursor-pointer text-xs text-zinc-400">
+                        <input type="checkbox" onchange="toggleStepComplete(this, 'step-0')" class="rounded border-zinc-700 bg-zinc-900 text-emerald-500 focus:ring-0">
+                        <span>Sudah Dihafal</span>
+                    </label>
+                </div>
+
+                <div class="space-y-4 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                    <p>
+                        Sebelum menyentuh baris kode Laravel, pastikan web server dan database engine lokal sudah berjalan aktif:
+                    </p>
+                    <ol class="list-decimal list-inside space-y-2 text-zinc-300 pl-2">
+                        <li>Buka aplikasi <strong>XAMPP Control Panel</strong> pada komputer pengujian.</li>
+                        <li>Klik tombol <strong>Start</strong> pada modul <strong>Apache</strong> (default port: 80, 443).</li>
+                        <li>Klik tombol <strong>Start</strong> pada modul <strong>MySQL</strong> (default port: 3306).</li>
+                        <li>Pastikan indikator kedua modul berubah menjadi hijau. Jika port 3306 bentrok, pastikan tidak ada service MySQL instance lain yang sedang berjalan.</li>
+                    </ol>
+
+                    <div class="bg-zinc-950 border border-zinc-800 p-4 rounded-xl mt-4">
+                        <span class="text-xs font-semibold text-amber-400 block mb-1">Tips Ujian Serkom:</span>
+                        <p class="text-xs text-zinc-400">
+                            Anda sebenarnya tidak perlu membuka phpMyAdmin secara manual untuk membuat database. Laravel 11 otomatis menawarkan membuatkan database saat perintah <code class="text-zinc-200">php artisan migrate</code> dijalankan untuk pertama kalinya.
+                        </p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Chapter 1: Pembuatan Proyek & Konfigurasi .env -->
+            <article id="phase-1" class="bg-brand-card border border-brand-border rounded-2xl p-6 sm:p-8">
+                <div class="flex items-center justify-between pb-4 border-b border-zinc-800 mb-6">
+                    <div class="flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-md bg-zinc-800 border border-zinc-700 flex items-center justify-center font-mono font-bold text-xs text-zinc-200">01</span>
+                        <h3 class="text-lg font-bold text-zinc-100">Inisiasi Proyek & Konfigurasi .env</h3>
+                    </div>
+                    <label class="flex items-center gap-2 cursor-pointer text-xs text-zinc-400">
+                        <input type="checkbox" onchange="toggleStepComplete(this, 'step-1')" class="rounded border-zinc-700 bg-zinc-900 text-emerald-500 focus:ring-0">
+                        <span>Sudah Dihafal</span>
+                    </label>
+                </div>
+
+                <div class="space-y-4 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                    <p>Buka terminal (CMD / Git Bash) di direktori kerja Anda (misal di folder htdocs atau Projects) lalu jalankan perintah instalasi:</p>
+
+                    <div class="code-block rounded-xl p-4 font-mono text-xs relative group">
+                        <button type="button" onclick="copySnippet(this)" class="absolute right-3 top-3 text-[11px] bg-zinc-800 hover:bg-zinc-700 text-zinc-300 px-2.5 py-1 rounded transition">Salin</button>
+                        <pre><code>composer create-project laravel/laravel pesanmakan
+cd pesanmakan
+code .</code></pre>
+                    </div>
+
+                    <p>Buka file <code class="text-zinc-200">.env</code> di root proyek Anda dan sesuaikan kredensial koneksi database MySQL lokal:</p>
+
+                    <div class="code-block rounded-xl p-4 font-mono text-xs relative group">
+                        <button type="button" onclick="copySnippet(this)" class="absolute right-3 top-3 text-[11px] bg-zinc-800 hover:bg-zinc-700 text-zinc-300 px-2.5 py-1 rounded transition">Salin</button>
+                        <pre><code>DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=pesanmakan
+DB_USERNAME=root
+DB_PASSWORD=</code></pre>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Chapter 2: Scaffolding Model, Migration, Controller (-mcr) -->
+            <article id="phase-2" class="bg-brand-card border border-brand-border rounded-2xl p-6 sm:p-8">
+                <div class="flex items-center justify-between pb-4 border-b border-zinc-800 mb-6">
+                    <div class="flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-md bg-zinc-800 border border-zinc-700 flex items-center justify-center font-mono font-bold text-xs text-zinc-200">02</span>
+                        <h3 class="text-lg font-bold text-zinc-100">Eksekusi Perintah Scaffolding Model & Controller</h3>
+                    </div>
+                    <label class="flex items-center gap-2 cursor-pointer text-xs text-zinc-400">
+                        <input type="checkbox" onchange="toggleStepComplete(this, 'step-2')" class="rounded border-zinc-700 bg-zinc-900 text-emerald-500 focus:ring-0">
+                        <span>Sudah Dihafal</span>
+                    </label>
+                </div>
+
+                <div class="space-y-4 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                    <p>Jalankan 3 baris perintah artisan vital di terminal VS Code secara berurutan:</p>
+
+                    <div class="code-block rounded-xl p-4 font-mono text-xs relative group">
+                        <button type="button" onclick="copySnippet(this)" class="absolute right-3 top-3 text-[11px] bg-zinc-800 hover:bg-zinc-700 text-zinc-300 px-2.5 py-1 rounded transition">Salin</button>
+                        <pre><code># 1. Master Menu Makanan (Model + Migration + Controller Resource)
+php artisan make:model Food -mcr
+
+# 2. Transaksi Induk Pesanan (Model + Migration + Controller Resource)
+php artisan make:model Order -mcr
+
+# 3. Rincian Item Transaksi (Model + Migration saja)
+php artisan make:model OrderDetail -m</code></pre>
+                    </div>
+
+                    <div class="bg-zinc-950 border border-zinc-800 p-4 rounded-xl mt-3">
+                        <h4 class="text-xs font-bold text-zinc-200 mb-1">Mengapa OrderDetail hanya menggunakan flag -m?</h4>
+                        <p class="text-xs text-zinc-400">
+                            Karena rincian item pesanan dibuat langsung di dalam proses checkout pada <code class="text-zinc-200">OrderController</code>. Tidak dibutuhkan controller terpisah untuk rincian detail pesanan, sehingga cukup migration dan model saja.
+                        </p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Chapter 3: Penulisan Migration 3 Tabel -->
+            <article id="phase-3" class="bg-brand-card border border-brand-border rounded-2xl p-6 sm:p-8">
+                <div class="flex items-center justify-between pb-4 border-b border-zinc-800 mb-6">
+                    <div class="flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-md bg-zinc-800 border border-zinc-700 flex items-center justify-center font-mono font-bold text-xs text-zinc-200">03</span>
+                        <h3 class="text-lg font-bold text-zinc-100">Cetak Biru Database Migration (3 Tabel Utama)</h3>
+                    </div>
+                    <label class="flex items-center gap-2 cursor-pointer text-xs text-zinc-400">
+                        <input type="checkbox" onchange="toggleStepComplete(this, 'step-3')" class="rounded border-zinc-700 bg-zinc-900 text-emerald-500 focus:ring-0">
+                        <span>Sudah Dihafal</span>
+                    </label>
+                </div>
+
+                <div class="space-y-6 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                    <!-- Migration 1: foods -->
+                    <div>
+                        <span class="text-xs font-mono text-emerald-400 block mb-1">database/migrations/xxxx_create_foods_table.php</span>
+                        <div class="code-block rounded-xl p-4 font-mono text-xs relative group">
+                            <button type="button" onclick="copySnippet(this)" class="absolute right-3 top-3 text-[11px] bg-zinc-800 hover:bg-zinc-700 text-zinc-300 px-2.5 py-1 rounded transition">Salin</button>
+                            <pre><code>Schema::create('foods', function (Blueprint $table) {
+    $table->id();
+    $table->string('name');
+    $table->enum('category', ['Makanan', 'Minuman', 'Cemilan']);
+    $table->decimal('price', 10, 2);
+    $table->text('description')->nullable();
+    $table->string('image')->nullable();
+    $table->timestamps();
+});</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Migration 2: orders -->
+                    <div>
+                        <span class="text-xs font-mono text-sky-400 block mb-1">database/migrations/xxxx_create_orders_table.php</span>
+                        <div class="code-block rounded-xl p-4 font-mono text-xs relative group">
+                            <button type="button" onclick="copySnippet(this)" class="absolute right-3 top-3 text-[11px] bg-zinc-800 hover:bg-zinc-700 text-zinc-300 px-2.5 py-1 rounded transition">Salin</button>
+                            <pre><code>Schema::create('orders', function (Blueprint $table) {
+    $table->id();
+    $table->string('customer_name');
+    $table->string('table_number');
+    $table->decimal('total_price', 12, 2)->default(0);
+    $table->string('status')->default('Pending'); // Hindari enum kaku agar bebas error kapitalisasi
+    $table->timestamps();
+});</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Migration 3: order_details -->
+                    <div>
+                        <span class="text-xs font-mono text-amber-400 block mb-1">database/migrations/xxxx_create_order_details_table.php</span>
+                        <div class="code-block rounded-xl p-4 font-mono text-xs relative group">
+                            <button type="button" onclick="copySnippet(this)" class="absolute right-3 top-3 text-[11px] bg-zinc-800 hover:bg-zinc-700 text-zinc-300 px-2.5 py-1 rounded transition">Salin</button>
+                            <pre><code>Schema::create('order_details', function (Blueprint $table) {
+    $table->id();
+    // Foreign Key ke orders
+    $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
+    // Foreign Key ke foods
+    $table->foreignId('food_id')->constrained('foods')->onDelete('cascade');
+    $table->integer('quantity');
+    $table->decimal('subtotal', 12, 2);
+    $table->timestamps();
+});</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="p-3.5 rounded-lg bg-zinc-900 border border-zinc-800 text-xs text-zinc-400">
+                        Eksekusi migrasi di terminal: <code class="text-emerald-400 font-mono font-bold">php artisan migrate</code>. Jika muncul pertanyaan pembuatan database 'pesanmakan', ketik <code class="text-zinc-200">yes</code> lalu Enter.
+                    </div>
+                </div>
+            </article>
+
+            <!-- Chapter 4: Database Seeder & Akun Admin -->
+            <article id="phase-4" class="bg-brand-card border border-brand-border rounded-2xl p-6 sm:p-8">
+                <div class="flex items-center justify-between pb-4 border-b border-zinc-800 mb-6">
+                    <div class="flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-md bg-zinc-800 border border-zinc-700 flex items-center justify-center font-mono font-bold text-xs text-zinc-200">04</span>
+                        <h3 class="text-lg font-bold text-zinc-100">Setup Seeder Menu & Akun Admin Pengujian</h3>
+                    </div>
+                    <label class="flex items-center gap-2 cursor-pointer text-xs text-zinc-400">
+                        <input type="checkbox" onchange="toggleStepComplete(this, 'step-4')" class="rounded border-zinc-700 bg-zinc-900 text-emerald-500 focus:ring-0">
+                        <span>Sudah Dihafal</span>
+                    </label>
+                </div>
+
+                <div class="space-y-4 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                    <p>Buat seeder master makanan terlebih dahulu via terminal:</p>
+                    <div class="code-block rounded-xl p-3 font-mono text-xs">
+                        <code>php artisan make:seeder FoodSeeder</code>
+                    </div>
+
+                    <p>Daftarkan akun admin uji coba asesor dan panggil <code class="text-zinc-200">FoodSeeder</code> di <code class="text-zinc-200">database/seeders/DatabaseSeeder.php</code>:</p>
+
+                    <div class="code-block rounded-xl p-4 font-mono text-xs relative group">
+                        <button type="button" onclick="copySnippet(this)" class="absolute right-3 top-3 text-[11px] bg-zinc-800 hover:bg-zinc-700 text-zinc-300 px-2.5 py-1 rounded transition">Salin</button>
+                        <pre><code>use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
+public function run(): void
+{
+    // Akun default untuk login asesor tanpa register manual
+    User::firstOrCreate(
+        ['email' => 'admin@gmail.com'],
+        [
+            'name'     => 'Admin Toko',
+            'password' => Hash::make('password123'),
+        ]
+    );
+
+    $this->call([
+        FoodSeeder::class,
+    ]);
+}</code></pre>
+                    </div>
+
+                    <p>Jalankan ulang migrasi dan seeding secara bersih:</p>
+                    <div class="code-block rounded-xl p-3 font-mono text-xs text-emerald-400 font-bold">
+                        <code>php artisan migrate:fresh --seed</code>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Chapter 5: Relasi Eloquent Model -->
+            <article id="phase-5" class="bg-brand-card border border-brand-border rounded-2xl p-6 sm:p-8">
+                <div class="flex items-center justify-between pb-4 border-b border-zinc-800 mb-6">
+                    <div class="flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-md bg-zinc-800 border border-zinc-700 flex items-center justify-center font-mono font-bold text-xs text-zinc-200">05</span>
+                        <h3 class="text-lg font-bold text-zinc-100">Setup Relasi Eloquent Model</h3>
+                    </div>
+                    <label class="flex items-center gap-2 cursor-pointer text-xs text-zinc-400">
+                        <input type="checkbox" onchange="toggleStepComplete(this, 'step-5')" class="rounded border-zinc-700 bg-zinc-900 text-emerald-500 focus:ring-0">
+                        <span>Sudah Dihafal</span>
+                    </label>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-mono">
+                    <div class="bg-zinc-950 border border-zinc-800 p-4 rounded-xl">
+                        <span class="text-emerald-400 font-bold block mb-2">// Food.php</span>
+                        <p class="text-zinc-400 text-[11px] font-sans mb-3">Satu makanan ada di banyak rincian pesanan.</p>
+                        <pre><code>protected $table = 'foods';
+protected $guarded = ['id'];
+
+public function orderDetails() {
+    return $this->hasMany(
+        OrderDetail::class, 'food_id'
+    );
+}</code></pre>
+                    </div>
+
+                    <div class="bg-zinc-950 border border-zinc-800 p-4 rounded-xl">
+                        <span class="text-sky-400 font-bold block mb-2">// Order.php</span>
+                        <p class="text-zinc-400 text-[11px] font-sans mb-3">Satu pesanan induk punya banyak item detail.</p>
+                        <pre><code>protected $guarded = ['id'];
+
+public function orderDetails() {
+    return $this->hasMany(
+        OrderDetail::class, 'order_id'
+    );
+}</code></pre>
+                    </div>
+
+                    <div class="bg-zinc-950 border border-zinc-800 p-4 rounded-xl">
+                        <span class="text-amber-400 font-bold block mb-2">// OrderDetail.php</span>
+                        <p class="text-zinc-400 text-[11px] font-sans mb-3">Relasi balik belongsTo ke Food dan Order.</p>
+                        <pre><code>protected $guarded = ['id'];
+
+public function food() {
+    return $this->belongsTo(
+        Food::class, 'food_id'
+    );
+}
+public function order() {
+    return $this->belongsTo(
+        Order::class, 'order_id'
+    );
+}</code></pre>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Chapter 6: Instalasi Breeze & Storage Link -->
+            <article id="phase-6" class="bg-brand-card border border-brand-border rounded-2xl p-6 sm:p-8">
+                <div class="flex items-center justify-between pb-4 border-b border-zinc-800 mb-6">
+                    <div class="flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-md bg-zinc-800 border border-zinc-700 flex items-center justify-center font-mono font-bold text-xs text-zinc-200">06</span>
+                        <h3 class="text-lg font-bold text-zinc-100">Autentikasi Admin Breeze & Symlink Storage</h3>
+                    </div>
+                    <label class="flex items-center gap-2 cursor-pointer text-xs text-zinc-400">
+                        <input type="checkbox" onchange="toggleStepComplete(this, 'step-6')" class="rounded border-zinc-700 bg-zinc-900 text-emerald-500 focus:ring-0">
+                        <span>Sudah Dihafal</span>
+                    </label>
+                </div>
+
+                <div class="space-y-4 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                    <p>Instal package Laravel Breeze untuk menyediakan sistem autentikasi instan (Login, Register, Logout):</p>
+
+                    <div class="code-block rounded-xl p-4 font-mono text-xs relative group">
+                        <button type="button" onclick="copySnippet(this)" class="absolute right-3 top-3 text-[11px] bg-zinc-800 hover:bg-zinc-700 text-zinc-300 px-2.5 py-1 rounded transition">Salin</button>
+                        <pre><code>composer require laravel/breeze --dev
+php artisan breeze:install blade --no-interaction
+php artisan migrate
+php artisan storage:link
+npm install && npm run build</code></pre>
+                    </div>
+
+                    <div class="bg-zinc-950 border border-zinc-800 p-4 rounded-xl text-xs text-zinc-400">
+                        <strong class="text-zinc-200 block mb-1">Pentingnya storage:link:</strong>
+                        Perintah <code class="text-zinc-200">php artisan storage:link</code> menghubungkan folder privat <code class="text-zinc-300">storage/app/public</code> ke folder publik <code class="text-zinc-300">public/storage</code>, sehingga browser dapat menampilkan foto menu makanan yang diunggah.
+                    </div>
+                </div>
+            </article>
+
+            <!-- Chapter 7: CRUD Master Makanan & File Upload -->
+            <article id="phase-7" class="bg-brand-card border border-brand-border rounded-2xl p-6 sm:p-8">
+                <div class="flex items-center justify-between pb-4 border-b border-zinc-800 mb-6">
+                    <div class="flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-md bg-zinc-800 border border-zinc-700 flex items-center justify-center font-mono font-bold text-xs text-zinc-200">07</span>
+                        <h3 class="text-lg font-bold text-zinc-100">Logika CRUD Makanan & Pembersihan File Gambar Fisik</h3>
+                    </div>
+                    <label class="flex items-center gap-2 cursor-pointer text-xs text-zinc-400">
+                        <input type="checkbox" onchange="toggleStepComplete(this, 'step-7')" class="rounded border-zinc-700 bg-zinc-900 text-emerald-500 focus:ring-0">
+                        <span>Sudah Dihafal</span>
+                    </label>
+                </div>
+
+                <div class="space-y-4 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                    <p>Pada <code class="text-zinc-200">FoodController.php</code>, kelola upload file di method <code class="text-zinc-200">store</code>, <code class="text-zinc-200">update</code>, dan <code class="text-zinc-200">destroy</code>:</p>
+
+                    <div class="code-block rounded-xl p-4 font-mono text-xs relative group">
+                        <button type="button" onclick="copySnippet(this)" class="absolute right-3 top-3 text-[11px] bg-zinc-800 hover:bg-zinc-700 text-zinc-300 px-2.5 py-1 rounded transition">Salin</button>
+                        <pre><code>// Store (Simpan baru)
+if ($request->hasFile('image')) {
+    $validated['image'] = $request->file('image')->store('foods', 'public');
+}
+Food::create($validated);
+
+// Update (Hapus foto lama jika ganti baru)
+if ($request->hasFile('image')) {
+    if ($food->image && Storage::disk('public')->exists($food->image)) {
+        Storage::disk('public')->delete($food->image);
+    }
+    $validated['image'] = $request->file('image')->store('foods', 'public');
+}
+$food->update($validated);
+
+// Destroy (Hapus foto fisik saat hapus data)
+if ($food->image && Storage::disk('public')->exists($food->image)) {
+    Storage::disk('public')->delete($food->image);
+}
+$food->delete();</code></pre>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Chapter 8: Customer Catalog & Transaksi Atomik -->
+            <article id="phase-8" class="bg-brand-card border border-brand-border rounded-2xl p-6 sm:p-8">
+                <div class="flex items-center justify-between pb-4 border-b border-zinc-800 mb-6">
+                    <div class="flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-md bg-zinc-800 border border-zinc-700 flex items-center justify-center font-mono font-bold text-xs text-zinc-200">08</span>
+                        <h3 class="text-lg font-bold text-zinc-100">Katalog Customer & Eksekusi DB::transaction</h3>
+                    </div>
+                    <label class="flex items-center gap-2 cursor-pointer text-xs text-zinc-400">
+                        <input type="checkbox" onchange="toggleStepComplete(this, 'step-8')" class="rounded border-zinc-700 bg-zinc-900 text-emerald-500 focus:ring-0">
+                        <span>Sudah Dihafal</span>
+                    </label>
+                </div>
+
+                <div class="space-y-4 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                    <p>Method checkout pada <code class="text-zinc-200">OrderController::store</code> wajib dibungkus transaksi atomik:</p>
+
+                    <div class="code-block rounded-xl p-4 font-mono text-xs relative group">
+                        <button type="button" onclick="copySnippet(this)" class="absolute right-3 top-3 text-[11px] bg-zinc-800 hover:bg-zinc-700 text-zinc-300 px-2.5 py-1 rounded transition">Salin</button>
+                        <pre><code>public function store(Request $request)
+{
+    $request->validate([
+        'customer_name' => 'required|string|max:255',
+        'table_number'  => 'required|string',
+        'items'         => 'required|array',
+    ]);
+
+    $orderedItems = array_filter($request->items, fn($qty) => (int)$qty > 0);
+    if (empty($orderedItems)) {
+        return back()->with('error', 'Pilih minimal satu menu makanan!');
+    }
+
+    $order = DB::transaction(function () use ($request, $orderedItems) {
+        $order = Order::create([
+            'customer_name' => $request->customer_name,
+            'table_number'  => $request->table_number,
+            'total_price'   => 0,
+            'status'        => 'Pending',
+        ]);
+
+        $grandTotal = 0;
+        foreach ($orderedItems as $foodId => $qty) {
+            $food = Food::findOrFail($foodId);
+            $subtotal = $food->price * $qty;
+            $grandTotal += $subtotal;
+
+            OrderDetail::create([
+                'order_id' => $order->id,
+                'food_id'  => $food->id,
+                'quantity' => $qty,
+                'subtotal' => $subtotal,
+            ]);
+        }
+
+        $order->update(['total_price' => $grandTotal]);
+        return $order;
+    });
+
+    return redirect()->route('customer.index')->with('success', 'Pesanan berhasil dibuat!');
+}</code></pre>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Chapter 9: Admin Dashboard & Update Status PATCH -->
+            <article id="phase-9" class="bg-brand-card border border-brand-border rounded-2xl p-6 sm:p-8">
+                <div class="flex items-center justify-between pb-4 border-b border-zinc-800 mb-6">
+                    <div class="flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-md bg-zinc-800 border border-zinc-700 flex items-center justify-center font-mono font-bold text-xs text-zinc-200">09</span>
+                        <h3 class="text-lg font-bold text-zinc-100">Monitoring Admin & Update Status PATCH</h3>
+                    </div>
+                    <label class="flex items-center gap-2 cursor-pointer text-xs text-zinc-400">
+                        <input type="checkbox" onchange="toggleStepComplete(this, 'step-9')" class="rounded border-zinc-700 bg-zinc-900 text-emerald-500 focus:ring-0">
+                        <span>Sudah Dihafal</span>
+                    </label>
+                </div>
+
+                <div class="space-y-4 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                    <p>Ambil data dengan Eager Loading dan perbarui status pesanan seketika dari dropdown:</p>
+
+                    <div class="code-block rounded-xl p-4 font-mono text-xs relative group">
+                        <button type="button" onclick="copySnippet(this)" class="absolute right-3 top-3 text-[11px] bg-zinc-800 hover:bg-zinc-700 text-zinc-300 px-2.5 py-1 rounded transition">Salin</button>
+                        <pre><code>// 1. Controller: Eager Loading Anti N+1
+public function adminDashboard()
+{
+    $orders = Order::with('orderDetails.food')->latest()->get();
+    return view('dashboard', compact('orders'));
+}
+
+// 2. Controller: Update Status PATCH
+public function updateStatus(Request $request, $id)
+{
+    $request->validate(['status' => 'required|string']);
+    $order = Order::findOrFail($id);
+    $order->update(['status' => ucfirst(strtolower($request->status))]);
+    return back()->with('success', 'Status pesanan berhasil diperbarui!');
+}</code></pre>
+                    </div>
+
+                    <p>Di file Blade dashboard, form select dapat melakukan auto-submit saat diganti:</p>
+                    <div class="code-block rounded-xl p-3 font-mono text-xs">
+                        <code>&lt;select name="status" onchange="this.form.submit()"&gt;</code>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Chapter 10: Checklist Uji Kompetensi Asesor LSP -->
+            <article id="checklist" class="bg-brand-card border border-brand-border rounded-2xl p-6 sm:p-8">
+                <div class="flex items-center justify-between pb-4 border-b border-zinc-800 mb-6">
+                    <div class="flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-md bg-zinc-800 border border-zinc-700 flex items-center justify-center font-mono font-bold text-xs text-zinc-200">10</span>
+                        <h3 class="text-lg font-bold text-zinc-100">Checklist Final Verifikasi Pengujian Asesor LSP</h3>
+                    </div>
+                    <span class="text-xs text-emerald-400 font-mono font-bold">Zero-Error Gate</span>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="p-3.5 rounded-xl bg-zinc-950 border border-zinc-800 flex items-start gap-3">
+                        <input type="checkbox" id="chk1" class="mt-1 rounded border-zinc-700 bg-zinc-900 text-emerald-500 focus:ring-0">
+                        <label for="chk1" class="text-xs text-zinc-300">
+                            <strong>Migrasi & Seeding Bersih:</strong> Jalankan <code class="text-zinc-200">php artisan migrate:fresh --seed</code>. Pastikan tidak ada error foreign key constraint dan 5 data awal terisi.
+                        </label>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-zinc-950 border border-zinc-800 flex items-start gap-3">
+                        <input type="checkbox" id="chk2" class="mt-1 rounded border-zinc-700 bg-zinc-900 text-emerald-500 focus:ring-0">
+                        <label for="chk2" class="text-xs text-zinc-300">
+                            <strong>Login Admin Default:</strong> Buka <code class="text-zinc-200">/login</code>, input email <code class="text-zinc-200">admin@gmail.com</code> dan password <code class="text-zinc-200">password123</code>.
+                        </label>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-zinc-950 border border-zinc-800 flex items-start gap-3">
+                        <input type="checkbox" id="chk3" class="mt-1 rounded border-zinc-700 bg-zinc-900 text-emerald-500 focus:ring-0">
+                        <label for="chk3" class="text-xs text-zinc-300">
+                            <strong>CRUD Master Makanan:</strong> Coba tambah menu baru dengan mengunggah foto (.jpg/.png), ubah harga, dan hapus satu menu makanan.
+                        </label>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-zinc-950 border border-zinc-800 flex items-start gap-3">
+                        <input type="checkbox" id="chk4" class="mt-1 rounded border-zinc-700 bg-zinc-900 text-emerald-500 focus:ring-0">
+                        <label for="chk4" class="text-xs text-zinc-300">
+                            <strong>Uji Checkout Customer:</strong> Buka <code class="text-zinc-200">/</code> tanpa login. Pilih makanan, isi nomor meja, buka modal ringkasan, dan kirim pesanan.
+                        </label>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-zinc-950 border border-zinc-800 flex items-start gap-3">
+                        <input type="checkbox" id="chk5" class="mt-1 rounded border-zinc-700 bg-zinc-900 text-emerald-500 focus:ring-0">
+                        <label for="chk5" class="text-xs text-zinc-300">
+                            <strong>Monitoring & Ubah Status:</strong> Kembali ke dashboard admin, pastikan pesanan baru muncul paling atas dan ubah status dropdown menjadi "Selesai".
+                        </label>
+                    </div>
+                </div>
+            </article>
+
+        </section>
+
+        <!-- Quiz / Memorizer Modal -->
+        <div id="quizModal" class="fixed inset-0 bg-black/85 hidden items-center justify-center z-50 p-4">
+            <div class="bg-brand-card border border-brand-border rounded-2xl max-w-lg w-full p-6 shadow-2xl">
+                <div class="flex items-center justify-between border-b border-zinc-800 pb-3 mb-4">
+                    <h3 class="text-sm font-bold text-zinc-100 flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                        <span>Latihan Uji Hafalan Cepat (Flashcard)</span>
+                    </h3>
+                    <button type="button" onclick="toggleQuizMode()" class="text-zinc-500 hover:text-zinc-300 text-sm">✕</button>
+                </div>
+
+                <div id="quizContent" class="space-y-4">
+                    <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800">
+                        <span class="text-xs text-zinc-500 block mb-1">Pertanyaan <span id="quizIndex">1</span>/5</span>
+                        <p id="quizQuestion" class="text-sm font-semibold text-zinc-200 leading-snug"></p>
+                    </div>
+
+                    <div id="quizAnswerBox" class="hidden p-4 rounded-xl bg-zinc-900 border border-zinc-700 font-mono text-xs text-emerald-400"></div>
+
+                    <div class="flex gap-2">
+                        <button type="button" onclick="showQuizAnswer()" id="btnReveal" class="w-full py-2.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-semibold transition">
+                            Lihat Jawaban
+                        </button>
+                        <button type="button" onclick="nextQuizQuestion()" id="btnNext" class="hidden w-full py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition">
+                            Pertanyaan Selanjutnya
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-brand-border bg-brand-canvas py-10 mt-20">
+        <div class="max-w-6xl mx-auto px-4 text-center text-xs text-zinc-500">
+            <p>LaraSerkom Mastery | Dirancang untuk persiapan ujian sertifikasi kompetensi SMK RPL.</p>
+            <p class="mt-1">Dibuat dengan standar anti-slop, clean typography, dan zero-error best practices.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Progress Bar on Scroll
+        window.addEventListener('scroll', () => {
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPos = window.scrollY;
+            const progress = (scrollPos / docHeight) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        });
+
+        // Copy Code Snippet
+        function copySnippet(btn) {
+            const pre = btn.parentElement.querySelector('code');
+            if (pre) {
+                navigator.clipboard.writeText(pre.innerText).then(() => {
+                    const originalText = btn.textContent;
+                    btn.textContent = 'Tersalin!';
+                    btn.classList.add('text-emerald-400');
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.classList.remove('text-emerald-400');
+                    }, 2000);
+                });
+            }
+        }
+
+        // Copy Entire Cheat Sheet Summary
+        function copyEntireCheatSheet() {
+            const commands = `# Cheat Sheet Perintah Utama Laravel Serkom:
+composer create-project laravel/laravel pesanmakan
+cd pesanmakan
+php artisan make:model Food -mcr
+php artisan make:model Order -mcr
+php artisan make:model OrderDetail -m
+php artisan make:seeder FoodSeeder
+php artisan breeze:install blade --no-interaction
+php artisan migrate:fresh --seed
+php artisan storage:link
+npm install && npm run build
+php artisan serve`;
+            navigator.clipboard.writeText(commands).then(() => {
+                alert('Seluruh ringkasan perintah terminal berhasil disalin!');
+            });
+        }
+
+        // Step Completion Checklist persistence
+        function toggleStepComplete(checkbox, key) {
+            localStorage.setItem('laraserkom_' + key, checkbox.checked ? 'true' : 'false');
+        }
+
+        // Restore saved step states
+        document.addEventListener('DOMContentLoaded', () => {
+            for (let i = 0; i <= 9; i++) {
+                const key = 'step-' + i;
+                const saved = localStorage.getItem('laraserkom_' + key);
+                const elem = document.querySelector(`input[onchange*="${key}"]`);
+                if (elem && saved === 'true') {
+                    elem.checked = true;
+                }
+            }
+        });
+
+        // Flashcards / Quiz Data
+        const quizList = [
+            {
+                q: "Apa kepanjangan dan fungsi dari flag -m, -c, dan -r pada php artisan make:model Food -mcr?",
+                a: "-m : Migration (tabel database)\n-c : Controller (pengendali alur logika)\n-r : Resource (7 method CRUD: index, create, store, show, edit, update, destroy)"
+            },
+            {
+                q: "Mengapa pada OrderDetail.php disarankan menggunakan protected $guarded = ['id']?",
+                a: "Agar kolom kalkulasi seperti 'subtotal' tidak terblokir oleh perlindungan mass assignment exception saat checkout."
+            },
+            {
+                q: "Apa perintah untuk menghubungkan folder storage/app/public ke public/storage di browser?",
+                a: "php artisan storage:link"
+            },
+            {
+                q: "Bagaimana cara mencegah N+1 query problem saat mengambil daftar pesanan beserta detail itemnya?",
+                a: "Gunakan Eager Loading: Order::with('orderDetails.food')->latest()->get();"
+            },
+            {
+                q: "Mengapa simpan pesanan dan detail item wajib dibungkus DB::transaction()?",
+                a: "Untuk menjamin sifat atomik (all or nothing). Jika detail item kedua gagal, data pesanan induk otomatis di-rollback tanpa sisa sampah."
+            }
+        ];
+
+        let curQuiz = 0;
+
+        function toggleQuizMode() {
+            const modal = document.getElementById('quizModal');
+            if (modal.classList.contains('hidden')) {
+                curQuiz = 0;
+                renderQuiz();
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            } else {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+            }
+        }
+
+        function renderQuiz() {
+            const item = quizList[curQuiz];
+            document.getElementById('quizIndex').textContent = (curQuiz + 1);
+            document.getElementById('quizQuestion').textContent = item.q;
+            document.getElementById('quizAnswerBox').textContent = item.a;
+            document.getElementById('quizAnswerBox').classList.add('hidden');
+            document.getElementById('btnReveal').classList.remove('hidden');
+            document.getElementById('btnNext').classList.add('hidden');
+        }
+
+        function showQuizAnswer() {
+            document.getElementById('quizAnswerBox').classList.remove('hidden');
+            document.getElementById('btnReveal').classList.add('hidden');
+            document.getElementById('btnNext').classList.remove('hidden');
+        }
+
+        function nextQuizQuestion() {
+            curQuiz = (curQuiz + 1) % quizList.length;
+            renderQuiz();
+        }
+    </script>
+</body>
+</html>
